@@ -17,7 +17,7 @@ class MovieParser(AsyncParser):
         model: str = "gpt-4o",
         max_tokens: int = 2048,
         seconds_per_frame: int = 2,
-        max_frames: int = 10,
+        max_frames: int = 8,
     ):
         try:
             import cv2
@@ -57,7 +57,7 @@ class MovieParser(AsyncParser):
             raw_frames, audio_file = self.process_video(temp_video_path)
             for frame in raw_frames:
                 frame_text = process_frame_with_openai(
-                    frame, self.openai_api_key  # type: ignore
+                    frame, self.openai_api_key, max_tokens=self.max_tokens  # type: ignore
                 )
                 yield frame_text
 

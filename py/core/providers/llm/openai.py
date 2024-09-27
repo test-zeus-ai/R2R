@@ -10,6 +10,12 @@ from core.base.providers.llm import CompletionConfig, CompletionProvider
 logger = logging.getLogger(__name__)
 
 
+# Define a function to log usage in a special format
+def log_usage(api_type: str, token_usage: int, success: bool):
+    log_message = f"USAGE_LOG | type={api_type} | tokens={token_usage} | success={success}"
+    logger.info(log_message)
+
+
 class OpenAICompletionProvider(CompletionProvider):
     def __init__(self, config: CompletionConfig, *args, **kwargs) -> None:
         super().__init__(config)
@@ -71,6 +77,12 @@ class OpenAICompletionProvider(CompletionProvider):
         logger.debug(f"Executing sync OpenAI task with args: {args}")
         try:
             response = self.client.chat.completions.create(**args)
+            # Log token usage if available
+            token_usage = response.get("usage", {}).get("total_tokens", 0)
+            # Log usage for successful requests
+            log_usage(
+                api_type="completion", token_usage=token_usage, success=True
+            )
             logger.debug("Sync OpenAI task executed successfully")
             return response
         except Exception as e:

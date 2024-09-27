@@ -15,6 +15,12 @@ from core.base import (
 logger = logging.getLogger(__name__)
 
 
+# Define a function to log usage in a special format
+def log_usage(api_type: str, token_usage: int, success: bool):
+    log_message = f"USAGE_LOG | type={api_type} | tokens={token_usage} | success={success}"
+    logger.info(log_message)
+
+
 class OpenAIEmbeddingProvider(EmbeddingProvider):
     MODEL_TO_TOKENIZER = {
         "text-embedding-ada-002": "cl100k_base",
@@ -122,6 +128,13 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
             response = self.client.embeddings.create(
                 input=texts,
                 **kwargs,
+            )
+            # Log token usage if available
+            token_usage = response.get("usage", {}).get("total_tokens", 0)
+
+            # Log usage for successful embedding requests
+            log_usage(
+                api_type="embedding", token_usage=token_usage, success=True
             )
             return [data.embedding for data in response.data]
         except AuthenticationError as e:

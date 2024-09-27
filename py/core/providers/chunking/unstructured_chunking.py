@@ -20,6 +20,9 @@ class UnstructuredChunkingProvider(ChunkingProvider):
             self.Text = Text
 
         except ImportError:
+            print(
+                "Error, `unstructured` is required to run `UnstructuredChunkingProvider`"
+            )
             self.chunk_elements = None
             self.chunk_by_title = None
             self.Text = None
