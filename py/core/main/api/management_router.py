@@ -378,7 +378,7 @@ class ManagementRouter(BaseRouter):
                 document_uuid, offset, limit
             )
 
-            if not document_chunks_result:
+            if not document_chunks_result or not document_chunks_result["results"]:
                 raise R2RException(
                     "No chunks found for the given document ID.",
                     404,
