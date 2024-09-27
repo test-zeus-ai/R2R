@@ -32,3 +32,7 @@ dist/
 *.test
 go.work
 go.work.sum
+
+.venv
+venv
+.env
