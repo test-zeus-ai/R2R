@@ -15,6 +15,14 @@ require_email_verification = false
 default_admin_email = "admin@example.com"
 default_admin_password = "change_me_immediately"
 
+[chunking]
+provider = "r2r"
+strategy = "auto"
+chunking_strategy = "by_title"
+new_after_n_chars = 512
+max_characters = 1_024
+combine_under_n_chars = 128
+overlap = 20
 
 [completion]
 provider = "litellm"
@@ -24,7 +32,7 @@ concurrent_request_limit = 16
   model = "openai/gpt-4o"
   temperature = 0.1
   top_p = 1
-  max_tokens_to_sample = 1024
+  max_tokens_to_sample = 1_024
   stream = false
   add_generation_kwargs = { }
 
@@ -51,9 +59,9 @@ provider = "postgres"
 [ingestion]
 provider = "r2r"
 chunking_strategy = "recursive"
-chunk_size = 1024
+chunk_size = 1_024
 chunk_overlap = 512
-excluded_parsers = []
+excluded_parsers = ["mp4"]
 
 [kg]
 provider = "postgres"
@@ -84,7 +92,11 @@ log_table = "logs"
 log_info_table = "log_info"
 
 [orchestration]
-provider = "simple"
+provider = "hatchet"
+
+[parsing]
+provider = "r2r"
+excluded_parsers = []
 
 [prompt]
 provider = "r2r"

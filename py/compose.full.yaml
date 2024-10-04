@@ -292,7 +292,6 @@ services:
       timeout: 5s
       retries: 5
   r2r:
-    image: ${R2R_IMAGE:-ragtoriches/prod:latest-unstructured}
     build:
       context: .
       args:
