@@ -11,6 +11,12 @@ from shared.api.models.ingestion.responses import (
     WrappedIngestionResponse,
     WrappedUpdateResponse,
 )
+from shared.api.models.kg.responses import (
+    KGCreationResponse,
+    KGEnrichmentResponse,
+    WrappedKGCreationResponse,
+    WrappedKGEnrichmentResponse,
+)
 from shared.api.models.management.responses import (
     AnalyticsResponse,
     AppSettingsResponse,
@@ -30,6 +36,7 @@ from shared.api.models.management.responses import (
     WrappedCollectionListResponse,
     WrappedCollectionOverviewResponse,
     WrappedCollectionResponse,
+    WrappedDeleteResponse,
     WrappedDocumentChunkResponse,
     WrappedDocumentOverviewResponse,
     WrappedGetPromptsResponse,
@@ -42,12 +49,6 @@ from shared.api.models.management.responses import (
     WrappedUserOverviewResponse,
     WrappedUsersInCollectionResponse,
 )
-from shared.api.models.restructure.responses import (
-    KGCreationResponse,
-    KGEnrichmentResponse,
-    WrappedKGCreationResponse,
-    WrappedKGEnrichmentResponse,
-)
 from shared.api.models.retrieval.responses import (
     RAGAgentResponse,
     RAGResponse,
@@ -55,6 +56,7 @@ from shared.api.models.retrieval.responses import (
     WrappedRAGAgentResponse,
     WrappedRAGResponse,
     WrappedSearchResponse,
+    WrappedCompletionResponse,
 )
 
 __all__ = [
@@ -107,11 +109,13 @@ __all__ = [
     "WrappedUserCollectionResponse",
     "WrappedDocumentChunkResponse",
     "WrappedCollectionOverviewResponse",
+    "WrappedDeleteResponse",
     # Retrieval Responses
     "SearchResponse",
     "RAGResponse",
     "RAGAgentResponse",
     "WrappedSearchResponse",
+    "WrappedCompletionResponse",
     "WrappedRAGResponse",
     "WrappedRAGAgentResponse",
 ]
