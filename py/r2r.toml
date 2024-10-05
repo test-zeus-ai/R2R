@@ -74,6 +74,8 @@ batch_size = 256
     leiden_params = {}
 
   [kg.kg_search_settings]
+    use_kg_search = true
+    kg_search_type = "global"
     map_system_prompt = "graphrag_map_system_prompt"
     reduce_system_prompt = "graphrag_reduce_system_prompt"
     generation_config = { model = "openai/gpt-4o-mini" }

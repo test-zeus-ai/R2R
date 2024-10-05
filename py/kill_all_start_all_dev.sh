@@ -1,5 +1,5 @@
 #!/bin/bash
 set -ex
-r2r docker-down ||:
+r2r-full docker-down ||:
 docker rmi r2r-r2r ||:
-r2r serve --docker --config-path=r2r.toml --full --build ||:
+r2r serve --docker --build ||:
