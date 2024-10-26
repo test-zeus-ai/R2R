@@ -65,6 +65,7 @@ class ParsingPipe(AsyncPipe):
             with file_wrapper as file_content_stream:
                 file_content = file_content_stream.read()
 
+            # import ipdb; ipdb.set_trace()
             async for extraction in self.ingestion_provider.parse(  # type: ignore
                 file_content, document, ingestion_config_override
             ):
@@ -73,6 +74,7 @@ class ParsingPipe(AsyncPipe):
                 extraction.metadata["version"] = version
                 yield extraction
         except Exception as e:
+            logger.error(f"Error parsing : {e}")
             raise R2RDocumentProcessingError(
                 document_id=document.id,
                 error_message=f"Error parsing document: {str(e)}",

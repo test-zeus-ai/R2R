@@ -48,6 +48,7 @@ class R2RIngestionProvider(IngestionProvider):
         DocumentType.PNG: parsers.ImageParser,
         DocumentType.SVG: parsers.ImageParser,
         DocumentType.MP3: parsers.AudioParser,
+	DocumentType.MP4: parsers.MovieParser,
     }
 
     EXTRA_PARSERS = {
@@ -180,6 +181,8 @@ class R2RIngestionProvider(IngestionProvider):
         Union[DocumentExtraction, R2RDocumentProcessingError], None
     ]:
         if document.document_type not in self.parsers:
+        #if document.type not in self.parsers:
+        #    logger.error(f"Error parsing 2 : {e}")
             yield R2RDocumentProcessingError(
                 document_id=document.id,
                 error_message=f"Parser for {document.document_type} not found in `R2RIngestionProvider`.",
