@@ -352,7 +352,7 @@ services:
         exec uvicorn core.main.app_entry:app --host $${R2R_HOST} --port $${R2R_PORT}
       '
     volumes:
-      - ${R2R_CONFIG_PATH:-/}:${R2R_CONFIG_PATH:-/app/config}
+      - ./user_configs:/app/user_configs
       - hatchet_api_key:/hatchet_api_key:ro
     extra_hosts:
       - host.docker.internal:host-gateway
